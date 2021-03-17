@@ -52,32 +52,19 @@ class GameFragment : Fragment() {
                 container,
                 false
         )
+        binding.gameViewModel = viewModel
 
-        viewModel.score.observe(viewLifecycleOwner, Observer { score->
+        // Specify the fragment view as the lifecycle owner of the binding.
+        // This is used so that the binding can observe LiveData updates
+        binding.lifecycleOwner = viewLifecycleOwner
 
-            binding.scoreText.text = score.toString()
-        })
-
-        viewModel.word.observe(viewLifecycleOwner, Observer { word->
-
-            binding.wordText.text = word
-        })
 
         // Observer for the Game finished event
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer<Boolean> { hasFinished ->
             if (hasFinished) gameFinished()
         })
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
 
-        binding.endGameButton.setOnClickListener {
-            onEndGame()
-        }
         return binding.root
 
     }
