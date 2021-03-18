@@ -68,10 +68,6 @@ class GameFragment : Fragment() {
         return binding.root
 
     }
-
-    private fun onEndGame() {
-        gameFinished()
-    }
     /**
      * Called when the game is finished
      */
